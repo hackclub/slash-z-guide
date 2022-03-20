@@ -105,6 +105,10 @@ a > button {
     text-decoration: none;
 }
 
+.no-ul {
+    text-decoration: none;
+}
+
 div.card > p:first-child {
     margin-top: 0px;
 }
