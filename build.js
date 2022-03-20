@@ -149,3 +149,9 @@ writeFileSync(
         join(__dirname, 'docs', 'chapters', 'index.html')
     )
 );
+
+writeFileSync(
+    join(__dirname, 'docs', 'README.md'),
+    `# /z Guide\n\n/z Guide Static Site`,
+    'utf8'
+);
