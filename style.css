@@ -9,6 +9,14 @@
     transform: translateY(-50%);
 }
 
+body.hidenext .nav.next {
+    visibility: hidden;
+}
+
+body.hideback .nav.back {
+    display: none;
+}
+
 .nav.next:hover {
     transform: scale(1.0625) translateY(-50%);
 }
@@ -33,8 +41,8 @@ ol {
     box-sizing: border-box;
     border: 1px solid var(--smoke);
     border-radius: 8px;
-    position: absolute;
-    top: 350px;
+    position: fixed;
+    top: 330px;
     left: 25px;
     padding: 10px;
     padding-top: 20px;
@@ -56,6 +64,18 @@ ol {
     transition: left 0.1s;
 }
 
+@media screen and (max-width: 32em) {
+    .card {
+        padding: 10px;
+    }
+}
+
+@media screen and (max-height: 40em) {
+    .contents-panel {
+        position: absolute;
+    }
+}
+
 @media screen and (min-width: 90em) {
     .contents-panel {
         display: block;
@@ -63,6 +83,10 @@ ol {
     .contents-button {
         display: none!important;
     }
+    body.hideback .nav.back {
+        visibility: hidden;
+        display: initial;
+    }    
     .content-container, .button-container, .title-container, .github-container {
         position: relative;
         top: 0px;

@@ -1,6 +1,6 @@
-# 0. Slash-Z Guide
-Welcome to the Slash-Z Guide!
+# 1.1. What is /z?
 
+What is /z?
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vestibulum lorem sed risus ultricies tristique nulla aliquet. Et malesuada fames ac turpis egestas integer. Sit amet tellus cras adipiscing enim eu turpis. Auctor augue mauris augue neque gravida in fermentum. Maecenas accumsan lacus vel facilisis. Ut eu sem integer vitae justo eget magna. Congue quisque egestas diam in arcu. Egestas erat imperdiet sed euismod nisi. Porttitor rhoncus dolor purus non. Elementum nibh tellus molestie nunc. Auctor eu augue ut lectus arcu. Morbi tristique senectus et netus et malesuada fames ac. Posuere ac ut consequat semper viverra nam libero justo laoreet. Feugiat sed lectus vestibulum mattis. Neque gravida in fermentum et sollicitudin ac. Enim tortor at auctor urna nunc. Ultricies leo integer malesuada nunc. Cursus in hac habitasse platea dictumst quisque sagittis. Pharetra et ultrices neque ornare aenean euismod elementum.
 

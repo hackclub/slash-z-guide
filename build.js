@@ -1,4 +1,7 @@
-const { hideHtmlFileExtensions = false } = require('./config.json');
+const {
+    hideHtmlFileExtensions = false, // For configuration with different types of web servers
+    urlPrefix = '' // For if you are hosting this on a subdirectory
+} = require('./config.json');
 const { readdirSync, readFileSync, mkdirSync, writeFileSync, rmSync } = require('fs');
 const { marked } = require('marked');
 const { join } = require('path');
@@ -12,10 +15,69 @@ try {
 
 const chaptersObject = {};
 
-for (const chapter of chapters) {
+let subNumbers = {};
+chapters = chapters.map(chapter => {
     const fileData = readFileSync(join(__dirname, 'guide', chapter), 'utf8');
     const chapterName = fileData.split('\n')[0].substring(2);
-    const output = `<!DOCTYPE html>
+    const number = parseFloat(chapterName.substring(0, chapterName.indexOf('. ')));
+    const mainNumber = Math.floor(number);
+    const subNumber = number - mainNumber;
+    if (!subNumbers[mainNumber]) subNumbers[mainNumber] = 0;
+    if (subNumber) subNumbers[mainNumber]++;
+    const chapterTitle = chapterName.substring(chapterName.indexOf('. ') + 2);
+    return {
+        fileData,
+        fileName: chapter,
+        chapterName,
+        number,
+        mainNumber,
+        subNumber,
+        chapterTitle
+    }
+}).sort((a, b) => a.number - b.number);
+
+chapters.forEach(({ chapterTitle, fileName: chapter }) => {
+    chaptersObject[chapterTitle] = urlPrefix + '/chapters/' + chapter.substring(0, chapter.length - 3) + (hideHtmlFileExtensions ? '' : '.html');
+});
+
+const chapterLinks = Object.values(chaptersObject);
+
+writeFileSync(
+    join(__dirname, 'docs', 'index.html'),
+    readFileSync(
+        join(__dirname, 'index.html'), 'utf8'
+    ).replace(`{"unknown_chapter":{}}`, JSON.stringify(chaptersObject)), 'utf8'
+);
+
+const templateCode = readFileSync(join(__dirname, 'docs', 'index.html'), 'utf8');
+
+let contents = ``;
+for (const chapter of chapters) {
+    const { mainNumber, subNumber, chapterTitle } = chapter;
+    if (subNumber) {
+        if (subNumbers[mainNumber]) {
+            contents += `<li><a href="${chaptersObject[chapterTitle]}">${chapterTitle}</a></li>`;
+            subNumbers -= 1;
+            if (subNumbers[mainNumber] == 0) contents += `</ol></li>`
+        } else {
+        }
+    } else {
+        if (subNumbers[mainNumber]) {
+            contents += `<li><a href="${chaptersObject[chapterTitle]}">${chapterTitle}</a><ol>`;
+        } else {
+            contents += `<li><a href="${chaptersObject[chapterTitle]}">${chapterTitle}</a></li>`;
+        }
+    }
+}
+
+function template (title, body, back, next, github, flags = []) {
+    return templateCode.replace('{% pagetitle %}', title == '0. Slash-Z Guide' ? '/z Guide' : '/z Guide - ' + title).replace('{% title %}', title).replace('{% body %}', body).replace('{% contents %}', contents).replace('{% back %}', back).replace('{% next %}', next).replace('{% github %}', github).replace('body-classname-flags-here', flags.join(' '));
+}
+
+chapters.forEach((chapterData, index) => {
+    const chapter = chapterData.fileName;
+    const { fileData, chapterName, number, chapterTitle } = chapterData;
+    const output0 = `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -59,16 +121,13 @@ ${marked.parse(
 </body>
 </html>
     `;
-    chaptersObject[chapterName] = '/chapters/' + chapter.substring(0, chapter.length - 3) + '.html';
+    const back = chapterLinks[chapterLinks.indexOf(chaptersObject[chapterTitle]) - 1];
+    const next = chapterLinks[chapterLinks.indexOf(chaptersObject[chapterTitle]) + 1];
+    const output = template(chapterName, marked.parse(
+        fileData.substring(fileData.indexOf('\n') + 1)
+    ), back, next, 'https://github.com/YodaLightsabr/slashz-guide/blob/master/guide/' + chapter, index == 0 ? ['hideback'] : (index == chapters.length - 1 ? ['hidenext'] : []));
     writeFileSync(join(__dirname, 'docs', 'chapters', chapter.substring(0, chapter.length - 3) + '.html'), output, 'utf8');
-}
-
-writeFileSync(
-    join(__dirname, 'docs', 'index.html'),
-    readFileSync(
-        join(__dirname, 'index.html'), 'utf8'
-    ).replace(`{"unknown_chapter":{}}`, JSON.stringify(chaptersObject)), 'utf8'
-);
+});
 
 writeFileSync(
     join(__dirname, 'docs', 'favicon.png'),
