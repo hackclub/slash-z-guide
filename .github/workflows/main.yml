@@ -27,7 +27,7 @@ jobs:
         run: npm ci
 
       - name: Run build script
-        run: node build.js
+        run: "node build.js --githubrepo=${{ github.repository }}"
 
       # Skip Jekyll build
       - name: Skip Jekyll build
@@ -40,5 +40,5 @@ jobs:
           REPO: "git@github.com:${{ github.repository }}.git"
           BRANCH: gh-pages
           FOLDER: docs
-          MESSAGE: "{msg}"
+          MESSAGE: "Deploy commit: {msg}"
           SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_PRIVATE_KEY }}
