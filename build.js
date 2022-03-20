@@ -142,3 +142,10 @@ writeFileSync(
         join(__dirname, 'style.css')
     )
 );
+
+writeFileSync(
+    join(__dirname, 'docs', 'index.html'),
+    readFileSync(
+        join(__dirname, 'docs', 'chapters', 'index.html')
+    )
+);
