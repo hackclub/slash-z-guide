@@ -76,6 +76,12 @@ ol {
     }
 }
 
+a[href=undefined] {
+    display: inline-block;
+    height: 0px;
+    width: 0px;
+}
+
 @media screen and (min-width: 90em) {
     .contents-panel {
         display: block;
@@ -85,6 +91,7 @@ ol {
     }
     body.hideback .nav.back {
         visibility: hidden;
+        width: 0px;
         display: initial;
     }    
     .content-container, .button-container, .title-container, .github-container {
@@ -92,6 +99,18 @@ ol {
         top: 0px;
         left: 110px;
     }
+}
+
+a > button {
+    text-decoration: none;
+}
+
+.no-ul {
+    text-decoration: none;
+}
+
+div.card > p:first-child {
+    margin-top: 0px;
 }
 
 @media screen and (min-width: 100em) {

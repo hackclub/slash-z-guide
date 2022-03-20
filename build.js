@@ -6,6 +6,10 @@ const { readdirSync, readFileSync, mkdirSync, writeFileSync, rmSync } = require(
 const { marked } = require('marked');
 const { join } = require('path');
 
+const args = process.argv.slice(1);
+const repoArg = args.filter(arg => arg.startsWith('--githubrepo='));
+let github = repoArg.length ? repoArg[0].substring('--githubrepo='.length) : 'yodalightsabr/slashz-guide';
+
 let chapters = readdirSync(join(__dirname, 'guide')).filter(file => file.toLowerCase().endsWith('.md'));
 try {
     rmSync(join(__dirname, 'docs'), { recursive: true });
@@ -125,7 +129,7 @@ ${marked.parse(
     const next = chapterLinks[chapterLinks.indexOf(chaptersObject[chapterTitle]) + 1];
     const output = template(chapterName, marked.parse(
         fileData.substring(fileData.indexOf('\n') + 1)
-    ), back, next, 'https://github.com/YodaLightsabr/slashz-guide/blob/master/guide/' + chapter, index == 0 ? ['hideback'] : (index == chapters.length - 1 ? ['hidenext'] : []));
+    ), back, next, 'https://github.com/' + github + '/blob/master/guide/' + chapter, index == 0 ? ['hideback'] : (index == chapters.length - 1 ? ['hidenext'] : []));
     writeFileSync(join(__dirname, 'docs', 'chapters', chapter.substring(0, chapter.length - 3) + '.html'), output, 'utf8');
 });
 
