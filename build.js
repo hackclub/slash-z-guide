@@ -71,7 +71,7 @@ for (const chapter of chapters) {
 }
 
 function template (title, body, back, next, github, flags = []) {
-    return templateCode.replace('{% urlprefix %}', urlPrefix).replace('{% pagetitle %}', title == '0. Slash-Z Guide' ? '/z Guide' : '/z Guide - ' + title).replace('{% title %}', title).replace('{% body %}', body).replace('{% contents %}', contents).replace('{% back %}', back).replace('{% next %}', next).replace('{% github %}', github).replace('body-classname-flags-here', flags.join(' '));
+    return templateCode.replace(/\{\% urlprefix \%\}/g, urlPrefix).replace('{% pagetitle %}', title == '0. Slash-Z Guide' ? '/z Guide' : '/z Guide - ' + title).replace('{% title %}', title).replace('{% body %}', body).replace('{% contents %}', contents).replace('{% back %}', back).replace('{% next %}', next).replace('{% github %}', github).replace('body-classname-flags-here', flags.join(' '));
 }
 
 chapters.forEach((chapterData, index) => {
