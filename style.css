@@ -1,0 +1,245 @@
+.nav {
+    display: inline-flex;
+}
+
+.nav.next {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+}
+
+body.hidenext .nav.next {
+    visibility: hidden;
+}
+
+body.hideback .nav.back {
+    display: none;
+}
+
+.nav.next:hover {
+    transform: scale(1.0625) translateY(-50%);
+}
+
+.slashz, .color-slashz {
+    color: #3d72d0;
+}
+
+.slashz-logo {
+    height: 32px;
+    vertical-align: top;
+}
+
+ol {
+    padding-left: 20px;
+}
+
+.contents-panel {
+    display: none;
+    width: calc( 200px + (100vw - 1448px) / 2);
+    max-width: 260px;
+    box-sizing: border-box;
+    border: 1px solid var(--smoke);
+    border-radius: 8px;
+    position: fixed;
+    top: 330px;
+    left: 25px;
+    padding: 10px;
+    padding-top: 20px;
+}
+
+.contents-panel > .bar {
+    position: absolute;
+    width: calc( 200px + (100vw - 1448px) / 2);
+    max-width: 260px;
+    top: -1px;
+    left: -1px;
+    background: var(--primary);
+    height: 8px;
+    border-radius: 8px 8px 0px 0px;
+}
+
+.content-container, .button-container, .title-container, .github-container {
+    left: 0;
+    transition: left 0.1s;
+}
+
+@media screen and (max-width: 32em) {
+    .card {
+        padding: 10px;
+    }
+}
+
+@media screen and (max-height: 40em) {
+    .contents-panel {
+        position: absolute;
+    }
+}
+
+@media screen and (min-width: 90em) {
+    .contents-panel {
+        display: block;
+    }
+    .contents-button {
+        display: none!important;
+    }
+    body.hideback .nav.back {
+        visibility: hidden;
+        display: initial;
+    }    
+    .content-container, .button-container, .title-container, .github-container {
+        position: relative;
+        top: 0px;
+        left: 110px;
+    }
+}
+
+@media screen and (min-width: 100em) {
+    .content-container, .button-container, .title-container, .github-container {
+        position: relative;
+        top: 0px;
+        left: 80px;
+    }
+}
+
+@media screen and (min-width: 110em) {
+    .content-container, .button-container, .title-container, .github-container {
+        position: relative;
+        top: 0px;
+        left: 0px;
+    }
+}
+
+@media screen and (min-width: 32em) {
+    .slashz-logo {
+        height: 24px;
+    }
+}
+
+@media screen and (min-width: 48em) {
+    .slashz-logo {
+        height: 32px;
+    }
+}
+
+@media screen and (min-width: 64em) {
+    .slashz-logo {
+        height: 60px;
+    }
+}
+
+.darker, .color-darker {
+    color: #121217;
+}
+
+.dark, .color-dark {
+    color: #17171d;
+}
+
+.darkless, .color-darkless {
+    color: #252429;
+}
+
+.black, .color-black {
+    color: #1f2d3d;
+}
+
+.steel, .color-steel {
+    color: #273444;
+}
+
+.slate, .color-slate {
+    color: #3c4858;
+}
+
+.muted, .color-muted {
+    color: #8492a6;
+}
+
+.smoke, .color-smoke {
+    color: #e0e6ed;
+}
+
+.snow, .color-snow {
+    color: #f9fafc;
+}
+
+.white, .color-white {
+    color: #ffffff;
+}
+
+.red, .color-red {
+    color: #ec3750;
+}
+
+.orange, .color-orange {
+    color: #ff8c37;
+}
+
+.yellow, .color-yellow {
+    color: #f1c40f;
+}
+
+.green, .color-green {
+    color: #33d6a6;
+}
+
+.cyan, .color-cyan {
+    color: #5bc0de;
+}
+
+.blue, .color-blue {
+    color: #338eda;
+}
+
+.purple, .color-purple {
+    color: #a633d6;
+}
+
+.text, .color-text {
+    color: var(--black);
+}
+
+.background, .color-background {
+    color: var(--white);
+}
+
+.elevated, .color-elevated {
+    color: var(--white);
+}
+
+.sheet, .color-sheet {
+    color: var(--snow);
+}
+
+.sunken, .color-sunken {
+    color: var(--smoke);
+}
+
+.border, .color-border {
+    color: var(--smoke);
+}
+
+.primary, .color-primary {
+    color: #ec3750;
+}
+
+.secondary, .color-secondary {
+    color: #8492a6;
+}
+
+.accent, .color-accent {
+    color: #5bc0de;
+}
+
+.twitter, .color-twitter {
+    color: #1da1f2;
+}
+
+.facebook, .color-facebook {
+    color: #3b5998;
+}
+
+.instagram, .color-instagram {
+    color: #e1306c;
+}
