@@ -156,7 +156,6 @@ ${marked.parse(
                 .indexOf('"')
             )
         ) : '32';
-        console.log(match, match.indexOf("size=\"") + 6);
         let name = `($ICON_${icon}-${color}-${size})`;
         iconsToReplace[name] = getIcon(icon, color, size);
         fileData = fileData.replace(match, name);
@@ -194,5 +193,3 @@ writeFileSync(
     `# /z Guide\n\n/z Guide Static Site`,
     'utf8'
 );
-
-console.log(iconsToReplace);
