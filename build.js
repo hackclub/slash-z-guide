@@ -1,14 +1,23 @@
-const {
-    hideHtmlFileExtensions = false, // For configuration with different types of web servers
-    urlPrefix = '' // For if you are hosting this on a subdirectory
-} = require('./config.json');
+const config = require('./config.json');
 const { readdirSync, readFileSync, mkdirSync, writeFileSync, rmSync } = require('fs');
 const { marked } = require('marked');
 const { join } = require('path');
+const getIcon = require('./icons.js');
 
 const args = process.argv.slice(1);
+const iconsToReplace = {};
 const repoArg = args.filter(arg => arg.startsWith('--githubrepo='));
+const overrideArgs = args.filter(arg => arg.startsWith('--override_'));
+overrideArgs.forEach(arg => config[arg.substring(11, arg.indexOf('='))] = arg.substring(arg.indexOf('=') + 1));
 let github = repoArg.length ? repoArg[0].substring('--githubrepo='.length) : 'yodalightsabr/slashz-guide';
+
+if (config.hideHtmlFileExtensions == 'true') config.hideHtmlFileExtensions = true;
+if (config.hideHtmlFileExtensions == 'false') config.hideHtmlFileExtensions = false;
+
+const {
+    hideHtmlFileExtensions = false, // For configuration with different types of web servers
+    urlPrefix = '' // For if you are hosting this on a subdirectory
+} = config;
 
 let chapters = readdirSync(join(__dirname, 'guide')).filter(file => file.toLowerCase().endsWith('.md'));
 try {
@@ -75,12 +84,16 @@ for (const chapter of chapters) {
 }
 
 function template (title, body, back, next, github, flags = []) {
+    const matches = body.match(/\(\$ICON_.*?-.*?-.*?\)/g) || [];
+    matches.forEach(match => {
+        body = body.replace(match, iconsToReplace[match]);
+    });
     return templateCode.replace(/\{\% urlprefix \%\}/g, urlPrefix).replace('{% pagetitle %}', title == '0. Slash-Z Guide' ? '/z Guide' : '/z Guide - ' + title).replace('{% title %}', title).replace('{% body %}', body).replace('{% contents %}', contents).replace('{% back %}', back).replace('{% next %}', next).replace('{% github %}', github).replace('body-classname-flags-here', flags.join(' '));
 }
 
 chapters.forEach((chapterData, index) => {
     const chapter = chapterData.fileName;
-    const { fileData, chapterName, number, chapterTitle } = chapterData;
+    let { fileData, chapterName, number, chapterTitle } = chapterData;
     const output0 = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -127,6 +140,28 @@ ${marked.parse(
     `;
     const back = chapterLinks[chapterLinks.indexOf(chaptersObject[chapterTitle]) - 1];
     const next = chapterLinks[chapterLinks.indexOf(chaptersObject[chapterTitle]) + 1];
+    
+    const matches = fileData.substring(fileData.indexOf('\n') + 1).match(/<icon:.*?(( color=".*?")|())(( \/)|())>/g) || [];
+    matches.forEach(match => {
+        let icon = match.substring(6, match.indexOf(" "));
+        let color = match.includes("color=") ? (
+            match.substring(match.indexOf("color=\"") + 7, 
+            match.indexOf("color=\"") + 7 + match.substring(match.indexOf("color=\"") + 7)
+            .indexOf('"'))
+        ) : 'black';
+        let size = match.includes("size=\"") ? (
+            match.substring(
+                match.indexOf("size=\"") + 6, 
+                match.indexOf("size=\"") + 6 + match.substring(match.indexOf("size=\"") + 6)
+                .indexOf('"')
+            )
+        ) : '32';
+        console.log(match, match.indexOf("size=\"") + 6);
+        let name = `($ICON_${icon}-${color}-${size})`;
+        iconsToReplace[name] = getIcon(icon, color, size);
+        fileData = fileData.replace(match, name);
+    });
+
     const output = template(chapterName, marked.parse(
         fileData.substring(fileData.indexOf('\n') + 1)
     ), back, next, 'https://github.com/' + github + '/blob/master/guide/' + chapter, index == 0 ? ['hideback'] : (index == chapters.length - 1 ? ['hidenext'] : []));
@@ -159,3 +194,5 @@ writeFileSync(
     `# /z Guide\n\n/z Guide Static Site`,
     'utf8'
 );
+
+console.log(iconsToReplace);

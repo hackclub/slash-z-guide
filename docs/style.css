@@ -262,3 +262,13 @@ div.card > p:first-child {
 .instagram, .color-instagram {
     color: #e1306c;
 }
+
+blockquote {
+    background-color: var(--smoke);
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    padding: 2px 20px;
+    margin: 0px;
+    border-left: 4px solid var(--primary);
+}
