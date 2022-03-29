@@ -70,7 +70,7 @@ for (const chapter of chapters) {
     if (subNumber) {
         if (subNumbers[mainNumber]) {
             contents += `<li><a href="${chaptersObject[chapterTitle]}">${chapterTitle}</a></li>`;
-            subNumbers -= 1;
+            subNumbers[mainNumber] -= 1;
             if (subNumbers[mainNumber] == 0) contents += `</ol></li>`
         } else {
         }
@@ -88,7 +88,7 @@ function template (title, body, back, next, github, flags = []) {
     matches.forEach(match => {
         body = body.replace(match, iconsToReplace[match]);
     });
-    return templateCode.replace(/\{\% urlprefix \%\}/g, urlPrefix).replace('{% pagetitle %}', title == '0. Slash-Z Guide' ? '/z Guide' : '/z Guide - ' + title).replace('{% title %}', title).replace('{% body %}', body).replace('{% contents %}', contents).replace('{% back %}', back).replace('{% next %}', next).replace('{% github %}', github).replace('body-classname-flags-here', flags.join(' '));
+    return templateCode.replace(/\{\% urlprefix \%\}/g, urlPrefix).replace('{% pagetitle %}', title == '0. Slash-Z Guide' ? '/z Guide' : '/z Guide - ' + title).replace('{% title %}', title).replace('{% body %}', body).replace('{% contents %}', contents).replace('{% back %}', back).replace('{% next %}', next).replace('{% back %}', back).replace('{% next %}', next).replace('{% github %}', github).replace('body-classname-flags-here', flags.join(' '));
 }
 
 chapters.forEach((chapterData, index) => {
