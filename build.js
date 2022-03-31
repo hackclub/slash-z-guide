@@ -189,6 +189,13 @@ writeFileSync(
 );
 
 writeFileSync(
+    join(__dirname, 'docs', 'banner.png'),
+    readFileSync(
+        join(__dirname, 'banner.png')
+    )
+);
+
+writeFileSync(
     join(__dirname, 'docs', 'style.css'),
     readFileSync(
         join(__dirname, 'style.css')
