@@ -104,7 +104,7 @@
       </p>
     </div>
     <div
-      style="padding-top: var(--spacing-4); padding-bottom: var(--spacing-4)"
+      style="padding-top: var(--spacing-4); padding-bottom: var(--spacing-4); position: relative;"
     >
       <div class="container title-container">
         <h1 class="headline" style="font-size: var(--font-5)">
@@ -190,6 +190,7 @@
           <button class="btn" onclick="contents(false);">Close</button>
         </div>
       </div>
+      <a style="text-decoration: none;" target="_blank" href="https://github.com/YodaLightsabr/slashz-guide/commits/master"><p class="last-updated">1648699045236</p></a>
     </div>
     <style>
       .color-boxes {
@@ -225,6 +226,9 @@
       }
     </style>
     <script>
+      let updated = +document.querySelector('.last-updated').innerText;
+      document.querySelector('.last-updated').innerText = 'Last updated ' + new Date(updated).toLocaleDateString() + ' at ' + new Date(updated).toLocaleTimeString();
+      document.querySelector('.last-updated').classList.add('visible');
       const chapters = {"Slash-Z Guide":"/slashz-guide/chapters/index.html","Getting Started":"/slashz-guide/chapters/1_getting_started.html","Claiming Host":"/slashz-guide/chapters/1_1_host_keys.html","Scheduled Meetings":"/slashz-guide/chapters/2_scheduled_meetings.html","Scheduled Meeting Host":"/slashz-guide/chapters/2_1_app_home.html","Conclusion":"/slashz-guide/chapters/3_conclusion.html"};
       function contents (enabled) {
         console.log('contents', enabled);
