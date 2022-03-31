@@ -104,7 +104,7 @@
       </p>
     </div>
     <div
-      style="padding-top: var(--spacing-4); padding-bottom: var(--spacing-4)"
+      style="padding-top: var(--spacing-4); padding-bottom: var(--spacing-4); position: relative;"
     >
       <div class="container title-container">
         <h1 class="headline" style="font-size: var(--font-5)">
@@ -154,6 +154,7 @@
           <button class="btn" onclick="contents(false);">Close</button>
         </div>
       </div>
+      <a style="text-decoration: none;" target="_blank" href="{% commiturl %}"><p class="last-updated">{% updated %}</p></a>
     </div>
     <style>
       .color-boxes {
@@ -189,6 +190,9 @@
       }
     </style>
     <script>
+      let updated = +document.querySelector('.last-updated').innerText;
+      document.querySelector('.last-updated').innerText = 'Last updated ' + new Date(updated).toLocaleDateString() + ' at ' + new Date(updated).toLocaleTimeString();
+      document.querySelector('.last-updated').classList.add('visible');
       const chapters = {"unknown_chapter":{}};
       function contents (enabled) {
         console.log('contents', enabled);

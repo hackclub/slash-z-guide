@@ -83,12 +83,25 @@ for (const chapter of chapters) {
     }
 }
 
-function template (title, body, back, next, github, flags = []) {
+function template (title, body, back, next, githubUrl, flags = []) {
     const matches = body.match(/\(\$ICON_.*?-.*?-.*?\)/g) || [];
     matches.forEach(match => {
         body = body.replace(match, iconsToReplace[match]);
     });
-    return templateCode.replace(/\{\% urlprefix \%\}/g, urlPrefix).replace('{% pagetitle %}', title == '0. Slash-Z Guide' ? '/z Guide' : '/z Guide - ' + title).replace('{% title %}', title).replace('{% body %}', body).replace('{% contents %}', contents).replace('{% back %}', back).replace('{% next %}', next).replace('{% back %}', back).replace('{% next %}', next).replace('{% github %}', github).replace('body-classname-flags-here', flags.join(' '));
+    return templateCode
+        .replace(/\{\% urlprefix \%\}/g, urlPrefix)
+        .replace('{% pagetitle %}', title == '0. Slash-Z Guide' ? '/z Guide' : '/z Guide - ' + title)
+        .replace('{% title %}', title)
+        .replace('{% body %}', body)
+        .replace('{% contents %}', contents)
+        .replace('{% back %}', back)
+        .replace('{% back %}', back)
+        .replace('{% next %}', next)
+        .replace('{% next %}', next)
+        .replace('{% updated %}', Date.now())
+        .replace('{% commiturl %}', (config.commitHash && github) ? `https://github.com/${github}/commit/${config.commitHash}` : (github ? `https://github.com/${github}/commits/master` : 'javascript: void 0;'))
+        .replace('{% github %}', githubUrl)
+        .replace('body-classname-flags-here', flags.join(' '));
 }
 
 chapters.forEach((chapterData, index) => {

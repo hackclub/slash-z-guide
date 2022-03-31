@@ -2,6 +2,22 @@
     display: inline-flex;
 }
 
+p.last-updated {
+    position: absolute;
+    bottom: 4px;
+    left: 4px;
+    color: var(--snow);
+    display: none;
+    padding: 8px;
+    background-color: var(--slate);
+    border-radius: 4px;
+    margin: 0px;
+}
+
+p.last-updated.visible {
+    display: inline-block;
+}
+
 .nav.next {
     position: absolute;
     top: 50%;
@@ -92,14 +108,17 @@ a[href=undefined] {
     .contents-panel {
         display: block;
     }
+
     .contents-button {
         display: none!important;
     }
+
     body.hideback .nav.back {
         visibility: hidden;
         width: 0px;
         display: initial;
-    }    
+    }  
+
     .content-container, .button-container, .title-container, .github-container {
         position: relative;
         top: 0px;
@@ -107,10 +126,11 @@ a[href=undefined] {
     }
 }
 
+.contents-panel button {
+    display: none;
+}
+
 @media screen and (max-width: 90em) {
-    .contents-panel button {
-        text-align: center;
-    }
     .contents-panel:not(.mobile-hidden) {
         display: block;
     }
