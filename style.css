@@ -107,10 +107,11 @@ a[href=undefined] {
     }
 }
 
+.contents-panel button {
+    display: none;
+}
+
 @media screen and (max-width: 90em) {
-    .contents-panel button {
-        text-align: center;
-    }
     .contents-panel:not(.mobile-hidden) {
         display: block;
     }
