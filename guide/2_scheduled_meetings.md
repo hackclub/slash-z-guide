@@ -35,3 +35,5 @@ Now it'll work!
 ![Now it'll work!](https://cloud-9zgxl6zn4-hack-club-bot.vercel.app/2screen_shot_2021-02-23_at_11.05.02_am.png)
 
 <style>div.card img { max-width: 500px; }</style>
+
+> <icon:share size="26" color="#ec3750" /> **Note:** When you're sharing the meeting link with participants, make sure you share the `hack.af/z-join` link for scheduled meetings. This link won't change for the event, but if you share a `hackclub.zoom.us` link, it might change if you restart the call.

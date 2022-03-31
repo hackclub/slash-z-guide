@@ -82,6 +82,12 @@ a[href=undefined] {
     width: 0px;
 }
 
+.contents-container {
+    margin: 0px;
+    padding: 0px;
+    border: none;
+}
+
 @media screen and (min-width: 90em) {
     .contents-panel {
         display: block;
@@ -98,6 +104,52 @@ a[href=undefined] {
         position: relative;
         top: 0px;
         left: 110px;
+    }
+}
+
+@media screen and (max-width: 90em) {
+    .contents-panel button {
+        text-align: center;
+    }
+    .contents-panel:not(.mobile-hidden) {
+        display: block;
+    }
+
+    .contents-container {
+        position: relative;
+        left: 50%;
+        top: 0px;
+        transform: translateX(-50%);
+        display: inline-block;
+    }
+    
+    .contents-panel {
+        width: 100%!important;
+        max-width: 100%!important;
+        height: calc(350px)!important;
+        top: unset;
+        box-sizing: border-box;
+        border: 1px solid var(--smoke);
+        border-radius: 8px;
+        position: fixed;
+        bottom: 0px;
+        left: 0px;
+        padding: 10px;
+        z-index: 120;
+        background: white;
+        padding-top: 20px;
+    }
+
+    .contents-panel > .bar {
+        position: absolute;
+        width: 100%;
+        max-width: 100%;
+        top: -1px;
+        left: -1px;
+        background: var(--primary);
+        height: 8px;
+        z-index: 121;
+        border-radius: 8px 8px 0px 0px;
     }
 }
 
@@ -132,6 +184,15 @@ div.card > p:first-child {
 @media screen and (min-width: 32em) {
     .slashz-logo {
         height: 24px;
+    }
+}
+
+@media screen and (max-width: 48em) {
+    .contents-container {
+        left: 0px!important;
+        top: 0px!important;
+        transform: unset!important;
+        display: block;
     }
 }
 
