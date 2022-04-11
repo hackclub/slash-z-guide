@@ -191,6 +191,7 @@
       }
     </style>
     <script>
+      document.querySelectorAll('a > button').forEach(button => button.parentElement.style.textDecoration = 'none');
       let updated = +document.querySelector('.last-updated').innerText;
       document.querySelector('.last-updated').innerText = 'Last updated ' + new Date(updated).toLocaleDateString() + ' at ' + new Date(updated).toLocaleTimeString();
       document.querySelector('.last-updated').classList.add('visible');
