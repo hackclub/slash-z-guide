@@ -158,7 +158,7 @@ To navigate, use the Next or Back buttons or use the sidebar.</p>
           <button class="btn" onclick="contents(false);">Close</button>
         </div>
       </div>
-      <a style="text-decoration: none;" target="_blank" href="https://github.com/YodaLightsabr/slashz-guide/commits/master"><p class="last-updated">1649636853033</p></a>
+      <a style="text-decoration: none;" target="_blank" href="https://github.com/YodaLightsabr/slashz-guide/commits/master"><p class="last-updated">1649655885254</p></a>
     </div>
     <style>
       .color-boxes {
@@ -194,6 +194,7 @@ To navigate, use the Next or Back buttons or use the sidebar.</p>
       }
     </style>
     <script>
+      document.querySelectorAll('a > button').forEach(button => button.parentElement.style.textDecoration = 'none');
       let updated = +document.querySelector('.last-updated').innerText;
       document.querySelector('.last-updated').innerText = 'Last updated ' + new Date(updated).toLocaleDateString() + ' at ' + new Date(updated).toLocaleTimeString();
       document.querySelector('.last-updated').classList.add('visible');
