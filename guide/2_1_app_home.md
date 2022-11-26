@@ -3,7 +3,7 @@
 ## Host Keys for Scheduled Meetings
 Since you're not running a command for scheduled meetings, you won't see the host key right away for your Google Calendar meetings.
 
-To find the host key for these types of meetings, you'll need to find `@slash-z` on the Hack Club Slack.
+To find the host key for these types of meetings, you'll need to open [`@slash-z` on the Hack Club Slack](https://slack.com/app_redirect?team=T0266FRGM&app=A01LXD7TYG7).
 
 ![@slash-z](https://cloud-g9ejqahwa-hack-club-bot.vercel.app/0image.png)
 
